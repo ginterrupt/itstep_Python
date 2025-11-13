@@ -83,7 +83,7 @@ class LinkedList:
         return False
     def insert(self,index,value):
         if index < 0 or index > self.length:
-            return
+            return False
         if index == 0:
             return self.prepend(value)
         if index == self.length:
@@ -95,19 +95,33 @@ class LinkedList:
         temp.next = newnode
         self.length+=1
         return True
+    def remove(self,index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.pop_first()
+        if index == self.length -1 :
+            return self.pop
 
-
-
-
+        pre = self.get (index - 1)
+        temp = pre.next
+        pre.next = temp.next
+        temp.next = None
+        self.length -=1
+        return temp
+    
 
 mylist = LinkedList(0)
 mylist.append(1)
 mylist.append(2)
 mylist.append(3)
 
-mylist.set_value(2,888)
-mylist.insert(2,999)
+#mylist.set_value(2,888)
+#mylist.insert(2,999)
 #result = mylist.get(2).value
+print(mylist.print_list(),"\nafter remove", "- - "*10)
+
+mylist.remove(2)
 
 print(mylist.print_list())
 

@@ -5,7 +5,7 @@ CSV_FILE = "/home/glalu/python_step/project/users.csv"
 
 
 def init_csv():
-    #CSV ფაილის შემოწმება თუ არსეობს თუ არა შექიმნება
+    #CSV ფაილის შემოწმება შექმნა
     try:
         with open(CSV_FILE, "r", encoding="utf-8") as f:
             pass
@@ -27,13 +27,17 @@ def get_next_id():
                 if row:
                     id_value = int(row[2])
                     ids.append(id_value)
-            return max(ids) + 1 if ids else 1
+            if ids: 
+                max_id = max(ids)
+                return max_id + 1
+            else:
+                return 1
     except:
         return 1
 
 
 def read_all_users():
-    #CSV ფაილიდან მომხმარებლების დაბეჭდვა
+    #CSV ფაილიდან მომხმარებლების ლისტად ამოღება
     users = []
     with open(CSV_FILE, "r", encoding="utf-8") as f:
         reader = csv.reader(f)

@@ -22,7 +22,11 @@ def get_next_id():
         with open(CSV_FILE, "r", encoding="utf-8") as f:
             reader = csv.reader(f)
             next(reader)
-            ids = [int(row[2]) for row in reader if row]
+            ids = []
+            for row in reader:
+                if row:
+                    id_value = int(row[2])
+                    ids.append(id_value)
             return max(ids) + 1 if ids else 1
     except:
         return 1
@@ -80,14 +84,15 @@ def delete_user():
 
 
 def list_users():
-
-    print("\n--- იუზერების სია ---")
+    #მომხმარებლების სიის ნახვა
+    print("\n---     #მომხმარებლების სია ---")
     for row in read_all_users():
         print(f"სახელი: {row[0]}, პაროლი: {row[1]}, ID: {row[2]}, ბალანსი: {row[3]}₾")
     print()
 
 
 def add_balance_admin():
+    #ბალანსის დამატება
     username = input("ვის დაემატოს ბალანსი? შეიყვანე სახელი: ")
     amount = float(input("რამდენის დამატება გინდა? "))
 
@@ -111,6 +116,7 @@ def add_balance_admin():
 
 
 def admin_panel():
+    #ადმინპანელი
     admin_password = input("ჩაწერე ადმინის პაროლი: ")
     if admin_password == "12345":
         while True:
@@ -132,6 +138,7 @@ def admin_panel():
             elif choice == "4":
                 add_balance_admin()
             elif choice == "5":
+                print("კარგად, მალე გვეწვიე!")
                 break
             else:
                 print("არასწორი არჩევანი!")
@@ -140,6 +147,7 @@ def admin_panel():
 
 
 def find_user(name, password):
+    #მომხმარებლის მოძებნა
     with open(CSV_FILE, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)
@@ -150,6 +158,7 @@ def find_user(name, password):
 
 
 def update_balance(name, new_balance):
+    #ბალანსის განახლება მომხმარებელზე
     rows = []
     with open(CSV_FILE, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
@@ -164,6 +173,7 @@ def update_balance(name, new_balance):
 
 
 def user_panel():
+    #მომხმარებლის პანელი
     name = input("შეიყვანე სახელი: ")
     password = input("შეიყვანე პაროლი: ")
 

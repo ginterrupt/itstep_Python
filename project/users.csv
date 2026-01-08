@@ -1,4 +1,5 @@
 name,password,id,balance
 giga,123,1,721
-bob,123,2,122
+bob,123,2,10.0
 jack,123,3,500
+სამ,123,4,400
